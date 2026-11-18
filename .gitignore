@@ -1,0 +1,27 @@
+# LaTeX build artifacts
+build/
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv
+
+# Rendered output (rebuild from source)
+*.pdf
+!figures/**/*.pdf
+
+# Editors / OS
+.DS_Store
+*~
+.vscode/
