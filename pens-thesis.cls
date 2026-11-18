@@ -415,9 +415,11 @@
 \newcommand{\sumber}[1]{%
   \par\vspace{2.3mm}{\centering\fontsize{10}{12}\selectfont Sumber: #1\par}}
 % \headrow: shaded, bold header row of a table
-\newcommand{\headrow}{\rowcolor{penstablehead}}
+\newcommand{\headrow}{\rowcolor{penstablehead}\global\col@sep=\dimexpr\tabcolsep-0.4pt\relax}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\RequirePackage{ragged2e}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\setlength{\arrayrulewidth}{0.6pt}
 
 % Equations: left, indented 10 mm, number right-aligned and bold, one blank
 % line above and below.
