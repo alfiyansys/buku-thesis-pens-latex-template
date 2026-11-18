@@ -419,7 +419,7 @@
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \RequirePackage{ragged2e}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
-\setlength{\arrayrulewidth}{0.6pt}
+\setlength{\arrayrulewidth}{0.5pt}
 
 % Equations: left, indented 10 mm, number right-aligned and bold, one blank
 % line above and below.
