@@ -209,11 +209,16 @@
         {\includegraphics[width=14mm]{\pens@logo}};}}
   \end{tikzpicture}%
   \null\newpage}
+% In the main matter every chapter gets a separator on the left-hand page,
+% so the chapter itself starts on the right-hand page.
 \ifpens@print\ifpens@sep
   \renewcommand{\cleardoublepage}{%
     \clearpage
-    \ifodd\c@page\else
-      \if@mainmatter\pens@patternpage\else\hbox{}\thispagestyle{empty}\newpage\fi
+    \if@mainmatter
+      \ifodd\c@page\hbox{}\thispagestyle{empty}\newpage\fi
+      \pens@patternpage
+    \else
+      \ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage\fi
     \fi}
 \fi\fi
 % Blank verso pages carry no page number
@@ -512,6 +517,7 @@
 % ---------------------------------------------------------------------------
 % \halamanjudul: hard cover (unless nocover) + blank sheet + title page
 \newcommand{\halamanjudul}{%
+  \@mainmatterfalse
   \pagenumbering{alph}% invisible numbers for the cover pages
   \ifpens@cover
     \pens@hardcover
