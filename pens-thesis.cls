@@ -416,8 +416,14 @@
   \par\vspace{2.3mm}{\centering\fontsize{10}{12}\selectfont Sumber: #1\par}}
 % \headrow: shaded, bold header row of a table
 \newcommand{\headrow}{\rowcolor{penstablehead}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% Table cells may hyphenate (body text does not, as in Word): long words such
+% as model names would otherwise overflow into the next column. \hspace{0pt}
+% lets TeX hyphenate the first word of a cell too.
+\newcommand{\pens@cellhyphen}{\hyphenpenalty=50 \hspace{\z@}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash\pens@cellhyphen}p{#1}}
+\RequirePackage{ragged2e}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash\pens@cellhyphen}p{#1}}
+\setlength{\arrayrulewidth}{0.5pt}
 
 % Equations: left, indented 10 mm, number right-aligned and bold, one blank
 % line above and below.

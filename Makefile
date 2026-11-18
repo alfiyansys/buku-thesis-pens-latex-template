@@ -5,7 +5,7 @@ LATEX ?= xelatex -interaction=nonstopmode -halt-on-error -file-line-error
 .PHONY: all cover clean
 all: $(MAIN).pdf
 
-$(MAIN).pdf: $(wildcard *.tex *.cls *.bst *.bib */*.tex)
+$(MAIN).pdf: $(wildcard *.tex *.cls *.bst *.bib */*.tex */*/*.tex)
 	$(LATEX) $(MAIN)
 	bibtex $(MAIN)
 	$(LATEX) $(MAIN)
