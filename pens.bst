@@ -2,7 +2,9 @@
 %
 % Numeric labels [1], [2], ... with the list sorted by author, then year and
 % title, as required by "Panduan Buku Tesis S2" (Program Pascasarjana PENS).
-% Every element is separated by a comma and the entry ends with a period:
+% Every element is separated by a comma and the entry ends with a period.
+% As in the guide, titles are bold; journal / seminar / publisher of a book /
+% university / media name / internet address are italic:
 %
 %   article        Pengarang1, Pengarang2, Judul Makalah, Nama Jurnal,
 %                  Vol. xx, No. yy, Hal. aa-bb, Penerbit, Tahun.
@@ -57,6 +59,13 @@ FUNCTION {field.or.null}
 { duplicate$ empty$
     { pop$ "" }
     'skip$
+  if$
+}
+
+FUNCTION {embolden}
+{ duplicate$ empty$
+    { pop$ "" }
+    { "{\bfseries " swap$ * "}" * }
   if$
 }
 
@@ -147,7 +156,7 @@ FUNCTION {format.authors}
 }
 
 FUNCTION {format.title}
-{ title field.or.null }
+{ title field.or.null embolden }
 
 FUNCTION {n.dashify}
 { 't :=
@@ -155,13 +164,12 @@ FUNCTION {n.dashify}
     { t empty$ not }
     { t #1 #1 substring$ "-" =
         { t #1 #2 substring$ "--" = not
-            { "--" *
+            { "-" *
               t #2 global.max$ substring$ 't :=
             }
-            {   { t #1 #1 substring$ "-" = }
-                { "-" *
-                  t #2 global.max$ substring$ 't :=
-                }
+            { "-" *
+                { t #1 #1 substring$ "-" = }
+                { t #2 global.max$ substring$ 't := }
               while$
             }
           if$
@@ -205,7 +213,7 @@ FUNCTION {format.edition}
 FUNCTION {format.url}
 { url empty$
     { "" }
-    { "\url{" url * "}" * }
+    { "{\itshape\url{" url * "}}" * }
   if$
 }
 
@@ -267,8 +275,8 @@ FUNCTION {conference} { inproceedings }
 FUNCTION {book}
 { output.bibitem
   format.authors "author" output.check
-  title emphasize "title" output.check
-  format.publisher output
+  format.title "title" output.check
+  format.publisher emphasize output
   format.edition output
   year "year" output.check
   note output
@@ -278,7 +286,7 @@ FUNCTION {book}
 FUNCTION {inbook}
 { output.bibitem
   format.authors "author" output.check
-  title emphasize "title" output.check
+  format.title "title" output.check
   chapter empty$ 'skip$ { "Bab~" chapter * output } if$
   format.pages output
   format.publisher output
@@ -306,7 +314,7 @@ FUNCTION {mastersthesis}
   format.authors "author" output.check
   format.title "title" output.check
   "Tesis" format.thesis.type output.nonnull
-  school "school" output.check
+  school emphasize "school" output.check
   year "year" output.check
   note output
   fin.entry
@@ -317,7 +325,7 @@ FUNCTION {phdthesis}
   format.authors "author" output.check
   format.title "title" output.check
   "Disertasi" format.thesis.type output.nonnull
-  school "school" output.check
+  school emphasize "school" output.check
   year "year" output.check
   note output
   fin.entry
@@ -338,8 +346,8 @@ FUNCTION {techreport}
 FUNCTION {manual}
 { output.bibitem
   format.authors output
-  title emphasize "title" output.check
-  format.publisher output
+  format.title "title" output.check
+  format.publisher emphasize output
   format.edition output
   year output
   note output
@@ -351,7 +359,10 @@ FUNCTION {misc}
 { output.bibitem
   format.authors output
   format.title "title" output.check
-  howpublished emphasize output
+  url empty$
+    { howpublished emphasize output }
+    { howpublished output }
+  if$
   month output
   format.edition output
   format.url output
@@ -378,7 +389,7 @@ FUNCTION {unpublished}
 FUNCTION {proceedings}
 { output.bibitem
   format.authors output
-  title emphasize "title" output.check
+  format.title "title" output.check
   address output
   format.publisher output
   year "year" output.check
