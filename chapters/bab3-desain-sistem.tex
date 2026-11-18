@@ -1,0 +1,91 @@
+\chapter{Desain Sistem}
+\label{bab:desain-sistem}
+
+Uraian pada bab ini meliputi model yang digunakan, rancangan tesis, variabel
+dalam tesis, teknik pengumpulan data dan analisis data. Awali pembahasan dengan
+penjelasan umum tentang solusi yang ditawarkan, disertai diagram sistem secara
+\emph{high-level view} seperti pada Gambar~\ref{fig:desain-sistem}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[node distance=12mm and 14mm,
+      blok/.style={draw,thick,minimum width=28mm,minimum height=10mm,align=center}]
+    \node[blok] (a) {Bagian 1};
+    \node[blok,right=of a] (b) {Bagian 2};
+    \node[blok,right=of b] (c) {Bagian 3};
+    \draw[->,thick] (a) -- (b);
+    \draw[->,thick] (b) -- (c);
+  \end{tikzpicture}
+  \caption{Desain sistem dari solusi yang ditawarkan}
+  \label{fig:desain-sistem}
+\end{figure}
+
+Gambar diletakkan rata tengah dengan menyisakan satu baris kosong di atas dan
+di bawahnya. Nomor identitas dan keterangan gambar dituliskan rata tengah dan
+tebal, satu baris di bawah gambar. Bila gambar merupakan kutipan, sumbernya
+ditulis dengan \verb|\sumber{...}| di bawah gambar dan di atas keterangan,
+seperti pada Gambar~\ref{fig:kutipan}.
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\parbox[c][35mm][c]{80mm}{\centering Gambar hasil kutipan}}
+  \sumber{http://alamat.sumber/gambar.jpg}
+  \caption{Contoh gambar kutipan}
+  \label{fig:kutipan}
+\end{figure}
+
+\section{Bagian 1}
+
+Di sini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada
+bagian ini. Jika bagian ini mempunyai sub bagian, tuliskan dalam sub pembahasan.
+
+\subsection{Aaaa}
+
+Apabila pembahasan memerlukan persamaan matematis, persamaan ditulis pada baris
+sendiri, rata kiri dan masuk 10~mm, dengan nomor rata kanan dan tebal, seperti
+Persamaan~\eqref{eq:contoh}.
+\begin{equation}
+  y_t = y_{t-1} + \alpha \cdot (x_t - y_{t-1})
+  \label{eq:contoh}
+\end{equation}
+Persamaan~\eqref{eq:contoh} menunjukkan keterhubungan antara fungsi pada waktu
+sekarang dan sebelumnya.
+
+Tabel diletakkan rata tengah. Nomor identitas dan keterangan tabel ditulis rata
+tengah dan tebal, judul kolom tebal dengan latar agak gelap (\verb|\headrow|),
+dan sumber kutipan ditulis di bawah tabel dengan \verb|\sumber{...}|. Satu tabel
+tidak boleh melebihi satu halaman. Contohnya terlihat pada
+Tabel~\ref{tab:contoh}.
+
+\begin{table}[htbp]
+  \caption{Contoh penulisan tabel}
+  \label{tab:contoh}
+  \centering
+  \begin{tabular}{|C{35mm}|C{30mm}|C{30mm}|}
+    \hline
+    \headrow \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
+    \hline
+    Data 1 & 10 & 20 \\
+    \hline
+    Data 2 & 30 & 40 \\
+    \hline
+  \end{tabular}
+  \sumber{Badan Pusat Pengolahan Data, 2012 \cite{penulis2015online}}
+\end{table}
+
+\subsection{Bbbb}
+
+Di sini penulis dapat membahas sub bagian Bbbb lebih terperinci.
+
+\section{Bagian 2}
+
+Di sini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada
+Bagian~2.
+
+\subsection{Cccc}
+
+Di sini penulis dapat membahas sub bagian Cccc lebih terperinci.
+
+\subsection{Dddd}
+
+Di sini penulis dapat membahas sub bagian Dddd lebih terperinci.
