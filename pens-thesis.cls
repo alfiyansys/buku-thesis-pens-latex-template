@@ -99,6 +99,9 @@
 \onehalfspacing
 \setlength{\parindent}{10mm}
 \setlength{\parskip}{0pt}
+% Indonesian text is hyphenated with English patterns (no babel): allow some
+% extra inter-word stretch so lines never run into the margin.
+\setlength{\emergencystretch}{3em}
 
 % Page numbers centred at the bottom of every page
 \pagestyle{plain}
