@@ -1,0 +1,46 @@
+% =========================================================================
+% Buku Tesis S2 PENS -- dokumen utama
+% Template TIDAK RESMI (unofficial), mengacu pada Panduan Buku Tesis S2:
+% https://old.pascasarjana.pens.ac.id/docs/panduan_buku_tesis_S2.pdf
+%
+% Opsi class:
+%   print (default) | digital   cetak bolak-balik / PDF satu sisi
+%   nocover                     tanpa hard cover berwarna di halaman pertama
+%   separator                   halaman pemisah bermotif logo sebelum tiap bab
+%   pattern                     motif logo di belakang halaman pengesahan
+% =========================================================================
+\documentclass[print]{pens-thesis}
+
+\input{config/metadata}
+
+\begin{document}
+
+% ---- Halaman judul -------------------------------------------------------
+\halamanjudul
+\halamanpengesahan
+
+% ---- Bagian awal (nomor halaman romawi) ----------------------------------
+\mulaiprakata
+\halamanorisinalitas
+\halamanpublikasi
+\input{frontmatter/kata-pengantar}
+\input{frontmatter/abstrak}
+\daftarisi
+\daftargambar
+\daftartabel
+
+% ---- Bagian inti (nomor halaman arab) ------------------------------------
+\mainmatter
+\input{chapters/bab1-pendahuluan}
+\input{chapters/bab2-kajian-pustaka}
+\input{chapters/bab3-desain-sistem}
+\input{chapters/bab4-eksperimen}
+\input{chapters/bab5-penutup}
+
+% ---- Bagian akhir --------------------------------------------------------
+\backmatter
+\daftarpustaka{references}
+\lampiran
+\input{backmatter/lampiran}
+
+\end{document}
