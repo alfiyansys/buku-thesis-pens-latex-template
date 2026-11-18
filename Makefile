@@ -1,6 +1,6 @@
 # Build the thesis book with pdflatex + bibtex.
 MAIN ?= main
-LATEX ?= pdflatex -interaction=nonstopmode -halt-on-error -file-line-error
+LATEX ?= xelatex -interaction=nonstopmode -halt-on-error -file-line-error
 
 .PHONY: all cover clean
 all: $(MAIN).pdf
