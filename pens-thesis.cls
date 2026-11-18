@@ -415,7 +415,7 @@
 \newcommand{\sumber}[1]{%
   \par\vspace{2.3mm}{\centering\fontsize{10}{12}\selectfont Sumber: #1\par}}
 % \headrow: shaded, bold header row of a table
-\newcommand{\headrow}{\rowcolor{penstablehead}\global\col@sep=\dimexpr\tabcolsep-0.4pt\relax}
+\newcommand{\headrow}{\rowcolor{penstablehead}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \RequirePackage{ragged2e}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
