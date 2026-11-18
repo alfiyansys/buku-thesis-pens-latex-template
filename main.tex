@@ -4,10 +4,12 @@
 % https://old.pascasarjana.pens.ac.id/docs/panduan_buku_tesis_S2.pdf
 %
 % Opsi class:
-%   print (default) | digital   cetak bolak-balik / PDF satu sisi
-%   nocover                     tanpa hard cover berwarna di halaman pertama
-%   separator                   halaman pemisah bermotif logo sebelum tiap bab
-%   pattern                     motif logo di belakang halaman pengesahan
+%   print (default)  urutan halaman buku cetak sesuai panduan: halaman kosong,
+%                    lembar pemisah dan kertas karton disisipkan tanpa nomor
+%   digital          PDF tanpa halaman kosong, pemisah dan karton
+%   nocover          tanpa hard cover (cetak sampul dengan sampul.tex)
+%   noseparator      tanpa lembar pemisah sebelum tiap bab
+%   nokarton         tanpa kertas karton setelah/sebelum hard cover
 % =========================================================================
 \documentclass[print]{pens-thesis}
 
@@ -42,5 +44,6 @@
 \daftarpustaka{references}
 \lampiran
 \input{backmatter/lampiran}
+\sampulbelakang
 
 \end{document}

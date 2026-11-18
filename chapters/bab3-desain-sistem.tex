@@ -2,90 +2,146 @@
 \label{bab:desain-sistem}
 
 Uraian pada bab ini meliputi model yang digunakan, rancangan tesis, variabel
-dalam tesis, teknik pengumpulan data dan analisis data. Awali pembahasan dengan
-penjelasan umum tentang solusi yang ditawarkan, disertai diagram sistem secara
-\emph{high-level view} seperti pada Gambar~\ref{fig:desain-sistem}.
+dalam tesis, teknik pengumpulan data dan analisis data. Awali pembahasan pada
+bab ini dengan penjelasan umum tentang solusi yang ditawarkan untuk menjawab
+Problem. Akan lebih mudah dicerna, apabila penjelasan ini disertai dengan
+diagram sistem secara high-level view sehingga pembaca mendapatkan gambaran
+menyeluruh tentang desain sistem untuk menyelesaikan Problem. Setelah itu,
+penulis dapat menguraikan desain sistem yang digunakan dalam tesis secara
+rinci. Berikut contoh diagram desain sistem secara high-level view dan contoh
+sistematika pembahasan dari diagram desain.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
-  \begin{tikzpicture}[node distance=12mm and 14mm,
-      blok/.style={draw,thick,minimum width=28mm,minimum height=10mm,align=center}]
-    \node[blok] (a) {Bagian 1};
-    \node[blok,right=of a] (b) {Bagian 2};
-    \node[blok,right=of b] (c) {Bagian 3};
-    \draw[->,thick] (a) -- (b);
-    \draw[->,thick] (b) -- (c);
+  % Ganti dengan \includegraphics[width=...]{figures/nama-file}
+  \begin{tikzpicture}
+    \draw[thick] (0,0) rectangle (89.9mm,71.3mm);
+    \foreach \i/\t in {0/Bagian 1,1/Bagian 2,2/Bagian 3} {
+      \node[draw,thick,minimum width=60mm,minimum height=14mm]
+        at (44.95mm,58mm-\i*22mm) {\t};}
+    \draw[-{Latex},thick] (44.95mm,51mm) -- (44.95mm,43mm);
+    \draw[-{Latex},thick] (44.95mm,29mm) -- (44.95mm,21mm);
   \end{tikzpicture}
   \caption{Desain sistem dari solusi yang ditawarkan}
   \label{fig:desain-sistem}
 \end{figure}
 
-Gambar diletakkan rata tengah dengan menyisakan satu baris kosong di atas dan
-di bawahnya. Nomor identitas dan keterangan gambar dituliskan rata tengah dan
-tebal, satu baris di bawah gambar. Bila gambar merupakan kutipan, sumbernya
-ditulis dengan \verb|\sumber{...}| di bawah gambar dan di atas keterangan,
-seperti pada Gambar~\ref{fig:kutipan}.
+Gambar diletakkan rata tengah, dengan menyisakan 1 (satu) baris kosong diatas
+dan dibawah gambar. Setiap gambar harus mempunyai nomer identitas gambar dan
+diiringi dengan keterangan gambar, yang dituliskan rata tengah dan tebal. Nomer
+identitas dan keterangan gambar dituliskan pada 1 (satu) baris dibawah gambar.
+Nomer identitas terdiri dari nomer bab dan nomer urutan gambar pada bab
+tersebut. Setiap gambar harus dirujuk dan dibahas pada pembahasan dalam
+paragraf, seperti kalimat berikut. Gambar~\ref{fig:desain-sistem} menunjukkan
+bagan desain sistem yang mempunyai tiga bagian. Jika isi gambar adalah kutipan,
+maka penulis dapat menyebutkan sumber referensi dari gambar dibawah gambar dan
+diatas identitas gambar, dengan rata tengah dan ditulis dengan ukuran 10 point,
+seperti yang terlihat pada Gambar~\ref{fig:kutipan}.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
-  \fbox{\parbox[c][35mm][c]{80mm}{\centering Gambar hasil kutipan}}
-  \sumber{http://alamat.sumber/gambar.jpg}
+  \fbox{\parbox[c][58.5mm][c]{78.6mm}{\centering Gambar hasil kutipan}}
+  \sumber{http://cdn3.techworld.com/cmsdata/features/3210134/cisco-search-patent.jpg}
   \caption{Contoh gambar kutipan}
   \label{fig:kutipan}
 \end{figure}
 
 \section{Bagian 1}
 
-Di sini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada
-bagian ini. Jika bagian ini mempunyai sub bagian, tuliskan dalam sub pembahasan.
+Disini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada bagian
+ini. Jika bagian ini mempunyai sub bagian yang perlu diperjelas dalam
+pembahasan, penulis dapat menuliskannya dalam sub pembahasan pada bagian ini.
 
 \subsection{Aaaa}
 
-Apabila pembahasan memerlukan persamaan matematis, persamaan ditulis pada baris
-sendiri, rata kiri dan masuk 10~mm, dengan nomor rata kanan dan tebal, seperti
-Persamaan~\eqref{eq:contoh}.
+Disini penulis dapat membahas sub bagian Aaaa lebih terperinci. Deskripsi
+pembahasan seharusnya singkat, padat dan jelas, sehingga membuat pembaca
+memahami maksud penulis yang tertuang dalam tulisan. Apabila pembahasan penulis
+memerlukan penulisan persamaan matematis, penulis dapat menuliskannya seperti
+dibawah ini.
 \begin{equation}
-  y_t = y_{t-1} + \alpha \cdot (x_t - y_{t-1})
+  y_t = y_{t-1} + \alpha \cdot \left(x_t - y_{t-1}\right)
   \label{eq:contoh}
 \end{equation}
+Penulisan persamaan diletakkan pada baris sendiri rata kiri yang masuk 10 mm
+dari batas kiri, dengan menyisakan 1 (satu) baris kosong diatas dan dibawah
+gambar. Setiap persamaan harus mempunyai nomer identitas persamaan yang
+dituliskan rata kanan dan tebal. Setiap persamaan harus dirujuk dan dibahas
+pada pembahasan dalam paragraf, seperti kalimat berikut.
 Persamaan~\eqref{eq:contoh} menunjukkan keterhubungan antara fungsi pada waktu
 sekarang dan sebelumnya.
 
-Tabel diletakkan rata tengah. Nomor identitas dan keterangan tabel ditulis rata
-tengah dan tebal, judul kolom tebal dengan latar agak gelap (\verb|\headrow|),
-dan sumber kutipan ditulis di bawah tabel dengan \verb|\sumber{...}|. Satu tabel
-tidak boleh melebihi satu halaman. Contohnya terlihat pada
-Tabel~\ref{tab:contoh}.
+Untuk cara penulisan tabel, tabel diletakkan rata tengah, dengan menyisakan 1
+(satu) baris kosong diatas dan dibawah tabel. Setiap tabel harus mempunyai
+nomer identitas tabel dan diiringi dengan keterangan tabel, yang dituliskan
+rata tengah dan tebal. Nomer identitas dan keterangan tabel dituliskan pada 1
+(satu) baris dibawah tabel. Nomer identitas terdiri dari nomer bab dan nomer
+urutan tabel pada bab tersebut. Setiap tabel harus dirujuk dan dibahas pada
+pembahasan dalam paragraf, seperti kalimat berikut. Tabel~\ref{tab:contoh}
+menunjukkan contoh penulisan tabel, yang terdiri dari nomer identitas dan
+keterangan tabel, dan kemudian isi tabel. Judul pada tabel dapat dituliskan
+rata tengah, tebal dan berlatar-belakang agak gelap. Jika isi tabel adalah
+kutipan, maka penulis dapat menyebutkan sumber referensi dari tabel dibawah
+tabel dengan rata tengah dan ditulis dengan ukuran 10 point, seperti yang
+terlihat pada Tabel~\ref{tab:contoh}. Satu tabel tidak boleh melebihi dari 1
+(satu) halaman. Jika isi tabel terlalu banyak lebih dari 1 (satu) halaman,
+penulis dapat memecah tabel dan memberikan identitas tabel yang berbeda.
 
-\begin{table}[htbp]
+\begin{table}[h]
   \caption{Contoh penulisan tabel}
   \label{tab:contoh}
   \centering
-  \begin{tabular}{|C{35mm}|C{30mm}|C{30mm}|}
+  \begin{tabular}{|C{45.9mm}|C{18.3mm}|C{23.6mm}|}
     \hline
     \headrow \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
     \hline
-    Data 1 & 10 & 20 \\
-    \hline
-    Data 2 & 30 & 40 \\
-    \hline
+     & & \\ \hline
+     & & \\ \hline
+     & & \\ \hline
+     & & \\ \hline
+     & & \\ \hline
   \end{tabular}
-  \sumber{Badan Pusat Pengolahan Data, 2012 \cite{penulis2015online}}
+  \sumber{Badan Pusat Pengolahan Data, 2012 \cite{pengarang2012seminar}}
 \end{table}
 
 \subsection{Bbbb}
 
-Di sini penulis dapat membahas sub bagian Bbbb lebih terperinci.
+Disini penulis dapat membahas sub bagian Bbbb lebih terperinci. Deskripsi
+pembahasan seharusnya singkat, padat dan jelas, sehingga membuat pembaca
+memahami maksud penulis yang tertuang dalam tulisan.
 
 \section{Bagian 2}
 
-Di sini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada
-Bagian~2.
+Disini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada
+Bagian 2 ini. Jika bagian ini mempunyai sub bagian yang perlu diperjelas dalam
+pembahasan, penulis dapat menuliskannya dalam sub pembahasan pada bagian ini.
 
 \subsection{Cccc}
 
-Di sini penulis dapat membahas sub bagian Cccc lebih terperinci.
+Disini penulis dapat membahas sub bagian Cccc lebih terperinci. Deskripsi
+pembahasan seharusnya singkat, padat dan jelas, sehingga membuat pembaca
+memahami maksud penulis yang tertuang dalam tulisan.
 
 \subsection{Dddd}
 
-Di sini penulis dapat membahas sub bagian Dddd lebih terperinci.
+Disini penulis dapat membahas sub bagian Dddd lebih terperinci. Deskripsi
+pembahasan seharusnya singkat, padat dan jelas, sehingga membuat pembaca
+memahami maksud penulis yang tertuang dalam tulisan.
+
+\section{Bagian 3}
+
+Disini penulis dapat menjelaskan lebih terperinci apa saja yang ada pada
+Bagian 3 ini. Jika bagian ini mempunyai sub bagian yang perlu diperjelas dalam
+pembahasan, penulis dapat menuliskannya dalam sub pembahasan pada bagian ini.
+
+\subsection{Eeee}
+
+Disini penulis dapat membahas sub bagian Eeee lebih terperinci. Deskripsi
+pembahasan seharusnya singkat, padat dan jelas, sehingga membuat pembaca
+memahami maksud penulis yang tertuang dalam tulisan.
+
+\subsection{Ffff}
+
+Disini penulis dapat membahas sub bagian Ffff lebih terperinci. Deskripsi
+pembahasan seharusnya singkat, padat dan jelas, sehingga membuat pembaca
+memahami maksud penulis yang tertuang dalam tulisan.
