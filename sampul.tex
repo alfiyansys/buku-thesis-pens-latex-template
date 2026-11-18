@@ -1,0 +1,54 @@
+% =========================================================================
+% Sampul hard cover untuk dicetak (satu bentangan):
+%   sampul belakang | punggung (cover pinggir) | sampul depan
+% Warna RGB (0,43,166), area atas sampul depan putih 70 mm, pemisah kuning
+% RGB (242,203,0) 5 mm. Punggung: nama + NRP (12 pt) dan judul (14 pt),
+% tebal, putih, ditulis vertikal.
+% Template TIDAK RESMI, mengacu pada Panduan Buku Tesis S2 PENS.
+% =========================================================================
+\documentclass[digital,nocover]{pens-thesis}
+\input{config/metadata}
+
+% Lebar punggung buku: tanyakan ke percetakan (tergantung jumlah halaman)
+\newlength{\punggung}
+\setlength{\punggung}{20mm}
+
+\newlength{\lebarsampul}
+\setlength{\lebarsampul}{\dimexpr 420mm + \punggung\relax}
+\geometry{paperwidth=\lebarsampul,paperheight=297mm,margin=0mm}
+\pagestyle{empty}
+
+\begin{document}
+\makeatletter
+\noindent
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (NW) at (current page.north west);
+  % Sampul belakang + punggung
+  \fill[pensblue] (NW) rectangle ([xshift=210mm+\punggung,yshift=-297mm]NW);
+  % Sampul depan
+  \begin{scope}[shift={([xshift=210mm+\punggung]NW)}]
+    \fill[pensblue] (0,-75mm) rectangle (210mm,-297mm);
+    \fill[pensyellow] (0,-70mm) rectangle (210mm,-75mm);
+    \node at (45mm,-35mm)
+      {\includegraphics[height=30mm,width=30mm,keepaspectratio]{\pens@logo}};
+    \node[text=pensblue,font=\fontsize{24}{28}\selectfont\bfseries]
+      at (150mm,-35mm) {TESIS};
+    \node[anchor=north,text=white,inner sep=0pt] at (105mm,-110mm)
+      {\begin{minipage}[t][185mm]{150mm}\centering\linespread{1}\selectfont
+         \pens@titleblock\end{minipage}};
+  \end{scope}
+  % Punggung: teks vertikal, dibaca dari atas ke bawah
+  \begin{scope}[shift={([xshift=210mm+0.5\punggung]NW)}]
+    \draw[white,very thin,dashed] (-0.5\punggung,0) -- (-0.5\punggung,-297mm);
+    \draw[white,very thin,dashed] (0.5\punggung,0) -- (0.5\punggung,-297mm);
+    \node[rotate=-90,text=white,align=center,
+          font=\fontsize{12}{14}\selectfont\bfseries] at (0,-40mm)
+      {\pens@penulis\\NRP.~\pens@nrp};
+    \node[rotate=-90,text=white,text width=170mm,align=center,
+          font=\fontsize{14}{16}\selectfont\bfseries] at (0,-175mm)
+      {\MakeUppercase{\pens@judul}};
+  \end{scope}
+\end{tikzpicture}
+\makeatother
+\null
+\end{document}

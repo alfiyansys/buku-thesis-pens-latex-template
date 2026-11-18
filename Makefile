@@ -14,6 +14,7 @@ $(MAIN).pdf: $(wildcard *.tex *.cls *.bst *.bib */*.tex)
 cover: sampul.pdf
 sampul.pdf: sampul.tex config/metadata.tex
 	$(LATEX) sampul
+	$(LATEX) sampul
 
 clean:
 	rm -f *.aux *.bbl *.blg *.lof *.lot *.log *.out *.toc */*.aux
