@@ -58,6 +58,7 @@
   \RequirePackage{mathptmx}%
   \IfFileExists{tgtermes.sty}{\RequirePackage{tgtermes}}{}%
 }
+\IfFileExists{lmodern.sty}{\renewcommand{\ttdefault}{lmtt}}{}
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{graphicx}
@@ -67,7 +68,7 @@
 \RequirePackage{indentfirst}
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}
-\RequirePackage{tocloft}
+\RequirePackage[titles]{tocloft}
 \RequirePackage{caption}
 \RequirePackage{enumitem}
 \RequirePackage{array}
@@ -75,6 +76,7 @@
 \RequirePackage{multirow}
 \RequirePackage{etoolbox}
 \RequirePackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc}
 \RequirePackage{url}
 \RequirePackage[numbers,sort&compress,square,comma]{natbib}
 \RequirePackage[hidelinks,bookmarksnumbered]{hyperref}
@@ -225,11 +227,17 @@
 % ---------------------------------------------------------------------------
 \renewcommand{\cftdotsep}{2}
 \renewcommand{\cftchapdotsep}{\cftnodots}
-\renewcommand{\cftchapfont}{\bfseries}
-\renewcommand{\cftchappagefont}{\bfseries}
+\newcommand{\pens@tocfront}{%
+  \renewcommand{\cftchapfont}{\normalfont}%
+  \renewcommand{\cftchappagefont}{\normalfont}%
+  \setlength{\cftbeforechapskip}{0pt}}
+\newcommand{\pens@tocmain}{%
+  \renewcommand{\cftchapfont}{\bfseries}%
+  \renewcommand{\cftchappagefont}{\bfseries}%
+  \setlength{\cftbeforechapskip}{1.2\baselineskip}}
+\pens@tocfront
 \renewcommand{\cftchappresnum}{}
 \setlength{\cftchapnumwidth}{1.5em}
-\setlength{\cftbeforechapskip}{1.2\baselineskip}
 \setlength{\cftsecindent}{1.5em}
 \setlength{\cftsecnumwidth}{3em}
 \setlength{\cftsubsecindent}{4.5em}
@@ -240,19 +248,7 @@
 \setlength{\cfttabnumwidth}{5.5em}
 \setlength{\cftfigindent}{0pt}
 \setlength{\cfttabindent}{0pt}
-% Titles of the three lists use the chapter heading style
-\renewcommand{\cfttoctitlefont}{\hfill\bfseries\fontsize{14}{21}\selectfont}
-\renewcommand{\cftaftertoctitle}{\hfill}
-\renewcommand{\cftloftitlefont}{\hfill\bfseries\fontsize{14}{21}\selectfont}
-\renewcommand{\cftafterloftitle}{\hfill}
-\renewcommand{\cftlottitlefont}{\hfill\bfseries\fontsize{14}{21}\selectfont}
-\renewcommand{\cftafterlottitle}{\hfill}
-\setlength{\cftbeforetoctitleskip}{0pt}
-\setlength{\cftaftertoctitleskip}{3\baselineskip}
-\setlength{\cftbeforeloftitleskip}{0pt}
-\setlength{\cftafterloftitleskip}{3\baselineskip}
-\setlength{\cftbeforelottitleskip}{0pt}
-\setlength{\cftafterlottitleskip}{3\baselineskip}
+% With [titles], the three list titles use the \chapter* heading style
 % Section titles appear in upper case in the TOC, as in the guide
 \let\pens@oldl@section\l@section
 \renewcommand{\l@section}[2]{\pens@oldl@section{\MakeUppercase{#1}}{#2}}
@@ -261,17 +257,17 @@
 
 % Front-matter pages listed in the TOC
 \newcommand{\pens@tocentry}[1]{%
-  \phantomsection\addcontentsline{toc}{chapter}{\protect\numberline{}#1}}
+  \phantomsection\addcontentsline{toc}{chapter}{#1}}
 % Entries without page number (cover page, approval page)
 \newcommand{\pens@tocentrynopage}[1]{%
-  \addtocontents{toc}{\protect\contentsline{chapter}{\protect\numberline{}#1}{}{}}}
+  \addtocontents{toc}{\protect\contentsline{chapter}{#1}{}{}}}
 
 \newcommand{\daftarisi}{%
-  \cleardoublepage\pens@tocentry{DAFTAR ISI}\tableofcontents}
+  \clearpage\pens@tocentry{DAFTAR ISI}\tableofcontents}
 \newcommand{\daftargambar}{%
-  \cleardoublepage\pens@tocentry{DAFTAR GAMBAR}\listoffigures}
+  \clearpage\pens@tocentry{DAFTAR GAMBAR}\listoffigures}
 \newcommand{\daftartabel}{%
-  \cleardoublepage\pens@tocentry{DAFTAR TABEL}\listoftables}
+  \clearpage\pens@tocentry{DAFTAR TABEL}\listoftables}
 % Space between chapters in LoF/LoT removed (single list as in the guide)
 \patchcmd{\@chapter}{\addtocontents{lof}{\protect\addvspace{10\p@}}}{}{}{}
 \patchcmd{\@chapter}{\addtocontents{lot}{\protect\addvspace{10\p@}}}{}{}{}
@@ -323,18 +319,21 @@
 % Short direct quotation (1-2 lines): "italic text" followed by \cite
 \newcommand{\kutipan}[1]{``\textit{#1}''}
 % Long direct quotation (> 2 lines): separate paragraph, 10 pt,
-% left/right margin 10 mm, enclosed in double quotes.
-\newenvironment{kutipanpanjang}
+% left/right margin 10 mm, enclosed in double quotes, citation after it:
+%   \begin{kutipanpanjang}[\cite{key}] ... \end{kutipanpanjang}
+\newenvironment{kutipanpanjang}[1][]
   {\par\vspace{0.5\baselineskip}%
+   \def\pens@quotecite{#1}%
    \list{}{\leftmargin=10mm\rightmargin=10mm\listparindent=0pt}%
    \item\relax\fontsize{10}{15}\selectfont``\ignorespaces}
-  {\unskip''\endlist\vspace{0.5\baselineskip}}
+  {\unskip''\ifx\pens@quotecite\@empty\else~\pens@quotecite\fi
+   \endlist\vspace{0.5\baselineskip}}
 
 % ---------------------------------------------------------------------------
 % Signature row helper (approval page)
 % ---------------------------------------------------------------------------
 \newcommand{\pens@signrow}[3]{%
-  #1 & : & \underline{#2} & (\hspace{30mm}) \\
+  #1 & : & \underline{#2} & (\hspace{22mm}) \\
      &   & NIP. #3 & \\[1.2\baselineskip]}
 
 % ---------------------------------------------------------------------------
@@ -424,7 +423,7 @@
     \vspace{6mm}
   \end{center}
   {\singlespacing\noindent
-  \begin{tabular}{@{}p{37mm}@{}p{4mm}@{}p{75mm}@{}l@{}}
+  \begin{tabular}{@{}p{44mm}@{}p{4mm}@{}p{65mm}@{}l@{}}
     \pens@signrow{Pembimbing Utama}{\pens@utama}{\pens@utamanip}
     \ifx\pens@pendamping\@empty\else
       \pens@signrow{Pembimbing Pendamping}{\pens@pendamping}{\pens@pendampingnip}
@@ -448,7 +447,7 @@
 % Statement pages
 % ---------------------------------------------------------------------------
 \newcommand{\pens@signature}{%
-  \vspace{15mm}
+  \par\vspace{15mm}
   {\setlength{\parindent}{0pt}\hspace*{0.55\textwidth}%
    \begin{minipage}[t]{0.45\textwidth}
      \pens@kota, \pens@tanggal\par\vspace{\baselineskip}
@@ -457,7 +456,7 @@
    \end{minipage}\par}}
 
 \newcommand{\halamanorisinalitas}{%
-  \cleardoublepage
+  \clearpage
   \babtanpanomor{HALAMAN PERNYATAAN ORISINALITAS}
   \noindent Dengan ini saya menyatakan bahwa bagian atau keseluruhan tesis ini:
   \begin{enumerate}[label=\arabic*.,leftmargin=10mm,topsep=\baselineskip]
@@ -476,7 +475,7 @@
   \pens@signature}
 
 \newcommand{\halamanpublikasi}{%
-  \cleardoublepage
+  \clearpage
   \babtanpanomor{HALAMAN KESEPAKATAN PUBLIKASI}
   \noindent Demi pengembangan ilmu pengetahuan, dengan ini saya menyatakan:
   \begin{enumerate}[label=\arabic*.,leftmargin=10mm,topsep=\baselineskip]
@@ -499,12 +498,12 @@
 % ---------------------------------------------------------------------------
 % \begin{abstrak}{kata kunci 1, kata kunci 2} ... \end{abstrak}
 \newenvironment{abstrak}[1]
-  {\cleardoublepage\babtanpanomor{ABSTRAK}\def\pens@keywords{#1}}
+  {\clearpage\babtanpanomor{ABSTRAK}\def\pens@keywords{#1}}
   {\par\vspace{2\baselineskip}\noindent\textbf{Kata Kunci}\par
    \vspace{0.5\baselineskip}\noindent\pens@keywords\par}
 % Optional English abstract: \begin{abstract}{keyword 1, keyword 2}
-\renewenvironment{abstract}[1]
-  {\cleardoublepage\babtanpanomor{ABSTRACT}\def\pens@keywords{#1}}
+\newenvironment{abstract}[1]
+  {\clearpage\babtanpanomor{ABSTRACT}\def\pens@keywords{#1}}
   {\par\vspace{2\baselineskip}\noindent\textbf{Keywords}\par
    \vspace{0.5\baselineskip}\noindent\pens@keywords\par}
 
@@ -522,12 +521,17 @@
   \pens@titlepage
   \ifpens@print\hbox{}\thispagestyle{empty}\newpage\fi}
 
-% Roman numbering starts at the originality statement (page i)
-\newcommand{\mulaiprakata}{\cleardoublepage\pagenumbering{roman}}
+% Roman numbering starts at the originality statement (page i). Front-matter
+% pages follow each other directly; only chapters open on a right-hand page.
+\newcommand{\mulaiprakata}{\cleardoublepage\pagenumbering{roman}\@openrightfalse}
+\g@addto@macro\mainmatter{%
+  \ifpens@print\@openrighttrue\fi
+  \addtocontents{toc}{\protect\pens@tocmain}}
+\g@addto@macro\backmatter{\@openrightfalse}
 
 % Bibliography: listed in the TOC, sorted by author (pens.bst)
 \newcommand{\daftarpustaka}[1]{%
-  \cleardoublepage
+  \clearpage
   \phantomsection\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}%
   \bibliographystyle{pens}%
   \bibliography{#1}}
@@ -546,8 +550,9 @@
 
 % Appendices: "LAMPIRAN" in the TOC, appendix chapters titled "LAMPIRAN A"
 \newcommand{\lampiran}{%
-  \cleardoublepage
+  \clearpage
   \appendix
+  \@mainmattertrue
   \phantomsection\addcontentsline{toc}{chapter}{LAMPIRAN}%
   \titleformat{\chapter}[display]
     {\centering\bfseries\fontsize{14}{21}\selectfont}
